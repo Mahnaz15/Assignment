@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notejam-deployment
+  labels:
+    app: notejam
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: notejam
+  template:
+    metadata:
+      labels:
+        app: notejam
+    spec:
+      containers:
+      - name: notejam-container
+        image: mahnaz15/demo-app:notejam-1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: notejam-pv
+          mountPath: /app/notejam
+      imagePullSecrets:
+      - name: my-registrysecret
+      volumes:
+      - name: notejam-pv
+        persistentVolumeClaim:
+          claimName: notejam-pvc
+        
