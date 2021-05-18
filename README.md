@@ -160,6 +160,18 @@ To verify the application running on cluster, use port forwarding to access appl
 
 Change here notejam-deployment-6bc6fc6cc5-qbthw to the name of the pod.
 
+One of the requirments of this assignment is that the application must serve variable amount of traffic. To meet this requirement, we can use Horizontal Pod Autoscaler which can scale the number of pods in a deployment based on observed CPU utilization. 
+
+To check the current status of autoscaler by running:
+
+```
+kubectl get hpa
+
+NAME                 REFERENCE                       TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+notejam-deployment   Deployment/notejam-deployment   0%/50%    1         5         1          2m58s
+
+```
+
 ## Further Implementation
 
 To design the current architecture on a public cloud platform, I have planned to build this on AWS cloud platform.
